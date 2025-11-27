@@ -25,3 +25,32 @@ fetch(imageUrl)
     document.getElementById("explicacion-dia").textContent = NasaApod.descripcion;
   })
   .catch(err => console.error("Error obteniendo NASA APOD:", err));
+
+function saveFavorite() {
+    if (!NasaApod) return;
+    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    const existe = favoritos.some(p => p.titulo === NasaApod.titulo);
+    if (!existe) favoritos.push(NasaApod);
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+    updateFavoritesList(); 
+}
+
+function updateFavoritesList() {
+    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    const contenedor = document.getElementById("favoritos");
+
+    contenedor.innerHTML = "";
+
+    favoritos.forEach(item => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+            <p><strong>${item.titulo}</strong></p>
+            <img src="${item.img}" width="200">
+            <p>${item.date}</p>
+            <hr>
+        `;
+        contenedor.appendChild(div);
+    });
+}
+updateFavoritesList();
+
