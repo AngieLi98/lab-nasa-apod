@@ -53,6 +53,12 @@ function updateFavoritesList() {
             <img src="${item.img}" width="200">
             <p>${item.date}</p>
         `;
+                
+        div.style.cursor = "pointer";
+        div.addEventListener("click",() => {
+          cargarAPOD(item.date);
+        });
+        
         contenedor.appendChild(div);
     });
 }
