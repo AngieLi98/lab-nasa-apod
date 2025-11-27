@@ -49,7 +49,7 @@ function updateFavoritesList() {
     favoritos.forEach(item => {
         const div = document.createElement("div");
         div.innerHTML = `
-            <p><strong>${item.titulo}</strong></p>
+            <h3>${item.titulo}</h3>
             <img src="${item.img}" width="200">
             <p>${item.date}</p>
         `;

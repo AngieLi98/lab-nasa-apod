@@ -118,7 +118,7 @@ body {
   gap: 20px;
 }
 
-.favorito-card {
+.favoritos-grid div {
   background: rgba(255, 255, 255, 0.205);
   padding: 15px;
   border-radius: 15px;
@@ -126,19 +126,25 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
-.favorito-card:hover{
+.favoritos-grid :hover{
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(243, 129, 129, 0.45);
 }
 
-.fav-card img {
+.favoritos-grid h3 {
+  font-size: 20px;
+}
+
+.favoritos-grid  img {
   width: 100%;
   height: 180px;    
   object-fit: cover; 
   border-radius: 10px;
 }
 
-.favorito-card p {
+.favoritos-grid  p {
   margin-top: 10px;
   color: #d0d0ff;
 }
+
+
