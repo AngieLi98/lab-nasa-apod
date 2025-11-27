@@ -2,37 +2,42 @@ const apiKey = "iUnmyJG6q8UgpBceHLPmjYwKba0kkRseEC0brPJM";
 
 const today = new Date().toISOString().split("T")[0];
 
-const imageUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${today}`;
+document.getElementById("fecha_evento").max = today;
 
-let NasaApod = null; 
+let NasaApod = null;
 
-fetch(imageUrl)
-  .then(res => res.json())
-  .then(data => {
+function cargarAPOD(fecha) {
 
-    NasaApod = {
-        titulo: data.title,  
-        img: data.url,
-        date: data.date,
-        descripcion: data.explanation
-    };
+    const imageUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${fecha}`;
 
-    console.log("NASA APOD guardado:", NasaApod);
+    fetch(imageUrl)
+        .then(res => res.json())
+        .then(data => {
 
-    document.getElementById("imagen-dia").src = NasaApod.img;
-    document.getElementById("titulo-dia").textContent = NasaApod.titulo;
-    document.getElementById("fecha-dia").textContent = NasaApod.date
-    document.getElementById("explicacion-dia").textContent = NasaApod.descripcion;
-  })
-  .catch(err => console.error("Error obteniendo NASA APOD:", err));
+            NasaApod = {
+                titulo: data.title,
+                img: data.url,
+                date: data.date,
+                descripcion: data.explanation
+            };
+
+            console.log("NASA APOD guardado:", NasaApod);
+
+            document.getElementById("imagen-dia").src = NasaApod.img;
+            document.getElementById("titulo-dia").textContent = NasaApod.titulo;
+            document.getElementById("fecha-dia").textContent = NasaApod.date;
+            document.getElementById("explicacion-dia").textContent = NasaApod.descripcion;
+        })
+        .catch(err => console.error("Error obteniendo NASA APOD:", err));
+}
 
 function saveFavorite() {
     if (!NasaApod) return;
     let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    const existe = favoritos.some(p => p.titulo === NasaApod.titulo);
+    const existe = favoritos.some(p => p.date === NasaApod.date);
     if (!existe) favoritos.push(NasaApod);
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
-    updateFavoritesList(); 
+    updateFavoritesList();
 }
 
 function updateFavoritesList() {
@@ -47,10 +52,22 @@ function updateFavoritesList() {
             <p><strong>${item.titulo}</strong></p>
             <img src="${item.img}" width="200">
             <p>${item.date}</p>
-            <hr>
         `;
         contenedor.appendChild(div);
     });
 }
+
+document.getElementById("fecha_evento").addEventListener("change", function () {
+
+    if (this.value > today) {
+        alert("No puedes elegir fechas futuras.");
+        this.value = today; 
+        return;
+    }
+
+    cargarAPOD(this.value); 
+});
+
+cargarAPOD(today);
 updateFavoritesList();
 
