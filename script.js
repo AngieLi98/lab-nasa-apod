@@ -1,25 +1,27 @@
-const apiKey = 'iUnmyJG6q8UgpBceHLPmjYwKba0kkRseEC0brPJM'; 
-const apodUrl = `api.nasa.gov{apiKey}&date=2025-11-27`;
+const apiKey = "iUnmyJG6q8UgpBceHLPmjYwKba0kkRseEC0brPJM";
 
-fetch(apodUrl)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('La red respondió con un error: ' + response.statusText);
-    }
-    return response.json(); 
-  })
+const today = new Date().toISOString().split("T")[0];
+
+const imageUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${today}`;
+
+let NasaApod = null; 
+
+fetch(imageUrl)
+  .then(res => res.json())
   .then(data => {
-    console.log(data); 
-    const titulo = data.title;
-    const imageUrl = data.url;
-    const explicacion = data.explanation;
-    const fecha = data.fecha
 
-    document.getElementById('titulo-dia').textContent = titulo;
-    document.getElementById('fecha-dia').textContent = fecha
-    document.getElementById('imagen-dia').src = imageUrl;
-    document.getElementById('explicacion-dia').textContent = explicacion;
+    NasaApod = {
+        titulo: data.title,  
+        img: data.url,
+        date: data.date,
+        descripcion: data.explanation
+    };
+
+    console.log("NASA APOD guardado:", NasaApod);
+
+    document.getElementById("imagen-dia").src = NasaApod.img;
+    document.getElementById("titulo-dia").textContent = NasaApod.titulo;
+    document.getElementById("fecha-dia").textContent = NasaApod.date
+    document.getElementById("explicacion-dia").textContent = NasaApod.descripcion;
   })
-  .catch(error => {
-    console.error('Hubo un problema con la operación fetch:', error);
-  });
+  .catch(err => console.error("Error obteniendo NASA APOD:", err));
