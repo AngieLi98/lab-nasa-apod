@@ -71,3 +71,4 @@ document.getElementById("fecha_evento").addEventListener("change", function () {
 cargarAPOD(today);
 updateFavoritesList();
 
+

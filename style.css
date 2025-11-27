@@ -1,0 +1,144 @@
+/* ===== FONDO GENERAL ===== */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #33265e, #12263f);
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.main-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+
+}
+
+/* ===== CARD PRINCIPAL ===== */
+.apod-card {
+  width: 90%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  transition: 0.3s ease;
+  color: #d0d0ff;
+}
+
+.apod-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(243, 129, 129, 0.45);
+}
+
+.apod-card h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.apod-card h2 {
+  font-size: 1.2rem;
+  color: #dcdcff;
+  margin-bottom: 20px;
+}
+
+#imagen-dia {
+  width: 100%;
+  border-radius: 15px;
+  margin: 20px 0;
+}
+#imagen-dia:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(243, 129, 129, 0.45);
+}
+
+/* ===== BOTÓN GUARDAR FAVORITOS ===== */
+.btn-fav {
+  background: linear-gradient(90deg, #6736ff, #3b9bff);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.btn-fav:hover {
+  transform: scale(1.08);
+  opacity: 0.9;
+  box-shadow: 0 15px 35px rgba(243, 129, 129, 0.45);
+}
+
+/* ===== FECHA ===== */
+.date-picker-box {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.date-picker-box input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #c9c9ff;
+  background: #ffffff;
+  color: #000000;
+  font-size: 1rem;
+  width: 250px;
+  text-align: center;
+}
+.date-picker-box input:hover{
+  box-shadow: 0 15px 35px rgba(243, 129, 129, 0.45);
+}
+/* ===== FAVORITOS SECTION ===== */
+.favoritos-section {
+  padding: 30px;
+  background: rgba(36, 36, 65, 0.65);
+  backdrop-filter: blur(10px);
+  margin-top: 30px;
+  color: #d0d0ff;
+}
+
+.favoritos-section h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #dedcff;
+  font-size: 1.8rem;
+}
+
+/* GRID DE FAVORITOS */
+.favoritos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.favorito-card {
+  background: rgba(255, 255, 255, 0.205);
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.favorito-card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(243, 129, 129, 0.45);
+}
+
+.fav-card img {
+  width: 100%;
+  height: 180px;    
+  object-fit: cover; 
+  border-radius: 10px;
+}
+
+.favorito-card p {
+  margin-top: 10px;
+  color: #d0d0ff;
+}
